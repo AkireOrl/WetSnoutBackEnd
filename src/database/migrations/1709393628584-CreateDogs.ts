@@ -56,8 +56,9 @@ export class CreateDogs1709393628584 implements MigrationInterface {
                      },
                      {
                         name: "gallery",
-                        type: "text[]",
-                     },
+                        type: "text",
+                        isNullable: true,
+                    },
                      {
                         name: "is_active",
                         type: "boolean",
