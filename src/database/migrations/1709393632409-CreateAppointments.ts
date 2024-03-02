@@ -63,6 +63,26 @@ export class CreateAppointments1709393632409 implements MigrationInterface {
           },
 
 ],
+foreignKeys: [
+    {
+        columnNames: ["user_id"],
+        referencedTableName: "users",
+        referencedColumnNames: ["id"],
+        onDelete: "CASCADE",
+       },
+       {
+        columnNames: ["dog_id"],
+        referencedTableName: "dogs",
+        referencedColumnNames: ["id"],
+        onDelete: "CASCADE",
+       },
+       {
+        columnNames: ["activity_id"],
+        referencedTableName: "activities",
+        referencedColumnNames: ["id"],
+        onDelete: "CASCADE",
+       },
+]
 }),
 true
         );
