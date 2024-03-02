@@ -1,5 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany,  PrimaryGeneratedColumn } from "typeorm";
 import { Role } from "../roles/roleModel";
+import { Appointment } from "../appointments/appointmentModel";
 
 @Entity("users")
 export class User {
@@ -10,20 +11,35 @@ export class User {
     username!: string;
 
     @Column()
-    name?: string;
+    first_name?: string;
     
 
     @Column()
-    surname?: string;
+    last_name?: string;
 
-    @Column()
-    photo?: string;
+    @Column({ unique: true })
+    email!: string;
 
     @Column({select: false} ) // password is not selected by default in queries
     password!: string;
 
-    @Column({ unique: true })
-    email!: string;
+    @Column()
+    photo?: string;
+
+    @Column()
+    city?: string;
+
+    @Column()
+    phone?: string;
+
+    @Column()
+    is_partner?: boolean = false;
+
+    @Column()
+    is_volunteer?:  boolean = true;
+
+    @Column()
+    is_active?: boolean = true;
 
     
     @ManyToMany(() => Role, (role) => role.users)
@@ -43,6 +59,6 @@ export class User {
    
 
     @OneToMany(() => Appointment, (appointment) => appointment.user_id)
-    clientAppointments?: Appointment[];
+    userAppointments?: Appointment[];
 
 }
