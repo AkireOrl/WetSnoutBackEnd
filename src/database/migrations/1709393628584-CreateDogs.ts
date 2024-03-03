@@ -37,16 +37,22 @@ export class CreateDogs1709393628584 implements MigrationInterface {
                         name: "size",
                         type: "varchar",
                         length: "255",
+                        isNullable: true,
+       
                      },
                      {
                         name: "weight",
                         type: "varchar",
                         length: "255",
+                        isNullable: true,
+       
                      },
                      {
                         name: "sociable",
                         type: "varchar",
                         length: "255",
+                        isNullable: true,
+       
                      },
                      {
                         name: "photo",
@@ -56,7 +62,8 @@ export class CreateDogs1709393628584 implements MigrationInterface {
                      },
                      {
                         name: "gallery",
-                        type: "text",
+                        type: "varchar",
+                        length: "1000",
                         isNullable: true,
                     },
                      {

@@ -28,7 +28,7 @@ export class Dog {
     @Column()
     photo?: string;
 
-    @Column()
+    @Column('json', { nullable: true })
     gallery?:  string[];
 
     @Column()

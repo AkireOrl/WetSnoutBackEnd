@@ -12,10 +12,10 @@
     "db:drop": "npx typeorm-ts-node-commonjs schema:drop -d ./src/database/data-source.ts",
     "db:reset": "npm run db:drop && npm run db:migrate"
   },
-  
   "author": "Erika Orlando",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
