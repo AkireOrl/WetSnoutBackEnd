@@ -7,8 +7,9 @@ export class Dog {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column()
+    @Column({unique: false})
     name?:string;
+    
 
     @Column()
     race?:string;

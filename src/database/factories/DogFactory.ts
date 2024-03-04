@@ -15,11 +15,11 @@ export class DogFactory extends BaseFactory<Dog> {
     ];
 
     private static readonly DOG_PHOTOS: string[] = [
-        'https://images.unsplash.com/photo-1517849347919-34e715b5b0c2',
-        'https://images.unsplash.com/photo-1518148437677-d12026783881',
-        'https://images.unsplash.com/photo-1518148437677-d12026783881',
-        'https://images.unsplash.com/photo-1518148437677-d12026783881',
-        'https://images.unsplash.com/photo-1518148437677-d12026783881',
+        'https://static9.depositphotos.com/1594920/1089/i/950/depositphotos_10891491-stock-photo-border-collie-3-years-old.jpg',
+        'https://st4.depositphotos.com/11516992/24044/i/600/depositphotos_240443626-stock-photo-greater-swiss-mountain-dog-sitting.jpg',
+        'https://static8.depositphotos.com/1007101/861/i/600/depositphotos_8612026-stock-photo-happy-dog-cairn-terrier.jpg',
+        'https://static9.depositphotos.com/1606449/1096/i/600/depositphotos_10969163-stock-photo-basset-hound-dog-looking-to.jpg',
+        'https://static5.depositphotos.com/1004199/419/i/600/depositphotos_4193142-stock-photo-golden-retriever-dog.jpg',
     ];
 
     private static readonly DOG_GALLERIES: string[][] = [
@@ -51,7 +51,8 @@ export class DogFactory extends BaseFactory<Dog> {
         dog.name = this.getRandomName(usedNames);
         dog.race = faker.helpers.arrayElement(DogFactory.DOG_RACES);
         dog.photo = faker.helpers.arrayElement(DogFactory.DOG_PHOTOS);
-       
+        dog.gallery = faker.helpers.arrayElement(DogFactory.DOG_GALLERIES);
+
 
         return dog;
     }

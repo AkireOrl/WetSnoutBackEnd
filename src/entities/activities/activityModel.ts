@@ -11,9 +11,6 @@ export class Activity {
     activity_name!: string
 
     @Column()
-    is_active:  boolean = true;
-
-    @Column()
     created_at!: Date
 
     @Column()

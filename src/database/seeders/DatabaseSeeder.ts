@@ -1,6 +1,7 @@
+import { activitySeeder } from "./ActivitySeeder";
 import { dogSeeder } from "./DogSeeder";
 import { userSeeder } from "./UserSeeder";
-import { roleSeeder } from "./roleSeeder"
+import { roleSeeder } from "./RoleSeeder";
 
 
 //-------------------------------------------------------
@@ -8,4 +9,5 @@ import { roleSeeder } from "./roleSeeder"
     await roleSeeder();
     await userSeeder();
     await dogSeeder();
+    await activitySeeder();
 })();

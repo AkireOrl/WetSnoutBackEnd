@@ -19,7 +19,9 @@ export const dogSeeder = async () => {
         console.log(`Creating ${dogs} ...`);
 
         await  dogRepository.save(dogs);
+        console.log("Seeding dogs completed successfully");
         return dogs;
+       
     }catch (error) {
         console.error("Error seeding the database:", error);
 }

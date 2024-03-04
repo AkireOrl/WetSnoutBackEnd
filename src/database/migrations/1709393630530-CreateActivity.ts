@@ -20,7 +20,7 @@ export class CreateActivity1709393630530 implements MigrationInterface {
                     name: "activity_name",
                     type: "enum",
                     enum: ["walk", "transport", "cleaning"],
-                    default: '"walk"'
+                    
                 },
                 {
                     name: "created_at",

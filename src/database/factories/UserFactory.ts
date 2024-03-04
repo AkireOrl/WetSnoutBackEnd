@@ -5,6 +5,9 @@ import bcrypt  from 'bcrypt';
 import { BaseFactory } from "./BaseFactory";
 //---------------------------------------------------------------------------------
 export class UserFactory extends BaseFactory<User> {
+   static createMany(adminCount: number, arg1: { roles: Role[]; }) {
+      throw new Error("Method not implemented.");
+  }
     protected  generateSpecifics(user: User): User {
        user.username = faker.internet.userName(); 
        user.first_name = faker.person.firstName();
@@ -24,5 +27,6 @@ export class UserFactory extends BaseFactory<User> {
      
  
        return user;
+       
     }
  }

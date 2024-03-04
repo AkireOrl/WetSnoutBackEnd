@@ -18,7 +18,7 @@ export class CreateDogs1709393628584 implements MigrationInterface {
                         name: "name",
                         type: "varchar",
                         length: "50",
-                        isUnique: true,
+                        isUnique: false,
                     },
                     {
                         name: "race",
