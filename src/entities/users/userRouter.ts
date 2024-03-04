@@ -12,5 +12,5 @@ router.post("/register", authController.register);
 router.post("/login", authController.login);
 
 router.get("/", UserController.getAll);
-
+router.get("/todos", UserController.getAllUsersFor);
 export default router;
