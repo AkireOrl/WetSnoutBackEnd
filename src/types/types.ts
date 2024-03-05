@@ -17,3 +17,15 @@ export interface TokenData {
     password: string;
     email: string;   
  }
+
+ export interface CreateDogRequestBody {
+   name?: string;
+   race?: string;
+   age?: number;
+   size?: string;
+   gender?: string;
+   weight?: string;
+   sociable?: string;
+   photo?: string;
+   gallery?: string[];
+}

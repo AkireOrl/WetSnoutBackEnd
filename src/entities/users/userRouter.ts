@@ -1,6 +1,7 @@
 import express from 'express';
 import { AuthController } from './authController';
 import { userController } from './userController';
+import { auth } from '../../middlewares/auth';
 
 //----------------------------------------------------------------------
 
@@ -13,4 +14,5 @@ router.post("/login", authController.login);
 
 router.get("/", UserController.getAll);
 router.get("/todos", UserController.getAllUsersFor);
+router.patch("/",auth, UserController.update);
 export default router;

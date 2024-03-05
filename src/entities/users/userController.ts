@@ -112,4 +112,24 @@ async getById(req: Request, res: Response): Promise<void | Response<any>> {
     }
  }
 
+ async update(req: Request, res: Response): Promise<void | Response<any>> {
+   try {
+      const id = +req.tokenData.userId;
+      const data = req.body;
+
+      const userRepository = AppDataSource.getRepository(User);
+      await userRepository.update( {id},data);
+
+      res.status(202).json({
+         message: "User updated successfully",
+      });
+   } catch (error) {
+      
+      res.status(500).json({
+         message: "Error while updating user",
+         
+      });
+   }
+
+}
 }

@@ -21,6 +21,9 @@ export class Dog {
     size? :string;
 
     @Column()
+    gender? :string;
+
+    @Column()
     weight?: string;
 
     @Column()
@@ -33,7 +36,7 @@ export class Dog {
     gallery?:  string[];
 
     @Column()
-    is_active:  boolean = true;
+    is_active?:  boolean = true;
 
     @OneToMany(() => Appointment, (Appointment) => Appointment.dog_id)
     dogAppointments?: Appointment[];

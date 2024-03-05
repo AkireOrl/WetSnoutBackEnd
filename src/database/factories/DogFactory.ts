@@ -50,12 +50,15 @@ export class DogFactory extends BaseFactory<Dog> {
         const usedNames = new Set<string>();
         dog.name = this.getRandomName(usedNames);
         dog.race = faker.helpers.arrayElement(DogFactory.DOG_RACES);
+        dog.age = faker.helpers.rangeToNumber({ min: 1, max: 10 });
+        dog.size = "small" || "medium" || "bigger";
+        dog.gender = "female" || "male"; // TODO: Implement gender randomness
+        dog.weight = faker.string.numeric(); 
+        dog.sociable = "si" || "no";
         dog.photo = faker.helpers.arrayElement(DogFactory.DOG_PHOTOS);
         dog.gallery = faker.helpers.arrayElement(DogFactory.DOG_GALLERIES);
 
 
         return dog;
     }
-
-
     }

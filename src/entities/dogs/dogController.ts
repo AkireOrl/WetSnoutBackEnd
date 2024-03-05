@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { AppDataSource } from "../../database/data-source";
 import { Dog } from "./dogModel";
 import { Role } from "../roles/roleModel";
+import { StatusCodes } from "http-status-codes";
+import { CreateDogRequestBody } from "../../types/types";
 
 
 
@@ -25,6 +27,7 @@ export class dogController {
                race: true,
                age: true,
                size:true,
+               gender: true,
                weight: true,
                sociable:true,
                photo: true,
@@ -57,66 +60,58 @@ export class dogController {
       }
 }
 
+async create(
+   req: Request<{}, {}, CreateDogRequestBody>,
+   res: Response
+): Promise<void | Response<any>> {
+   const { name, race, age, size, gender, weight, sociable, photo, gallery, } = req.body;
 
-// async getAllUsersFor(req: Request, res: Response): Promise<Response> {
-// const { token, page, role, name } = req.query;
-    
-// const dogRepository = AppDataSource.getRepository(Dog);
+   const dogRepository = AppDataSource.getRepository(Dog);
 
-// const query = dogRepository
-//   .createQueryBuilder("user")
-//   .leftJoinAndSelect("user.roles", "role")
-//   .select([
-//     "name",
-//     "race",
-//     "age",
-//     "size",
-//     "weight",
-//     "sociable",
-//     "photo",
-//     "gallery",
-//     "is_active",
-//     "id",
-//   ]);
+   try {
+      // Crear nuevo Perro
+      const newDog: Dog = {
+         name,
+         race,
+         age,
+         size,
+         gender, 
+         weight,
+         sociable,
+         photo,
+         gallery,
 
-// if (role) {
-//   query.where("role.role_name = :role", { role });
-// }
+      };
+      await dogRepository.save(newDog);
 
-// if (name) {
-//   query.andWhere("dog.name = :name", { name });
-// }
 
-// const skipAmount = page ? (Number(page) - 1) * 10 : 0;
-// const [dogs, total] = await query
-//   .skip(skipAmount)
-//   .take(10)
-//   .getManyAndCount();
+      res.status(StatusCodes.CREATED).json({
+         message: "Dog created successfully",
+      });
+   } catch (error: any) {
+      console.error("Error while creating User:", error);
+      res.status(500).json({
+         message: "Error while creating Dog",
+         error: error.message,
+      });
+   }
+}
+async update(req: Request, res: Response): Promise<void | Response<any>> {
+   try {
+      const id = parseInt(req.params.id);
+      const data = req.body;
 
-// return res.status(200).json({ token, dogs, total });
-// }
+      const dogRepository = AppDataSource.getRepository(Dog);
+      await dogRepository.update({id}, data);
 
-// async getById(req: Request, res: Response): Promise<void | Response<any>> {
-//     try {
-//        const id = +req.params.id;
-
-//        const dogRepository = AppDataSource.getRepository(Dog);
-//        const dog = await dogRepository.findOneBy({
-//           id: id,
-//        });
-
-//        if (!dog) {
-//           return res.status(404).json({
-//              message: "Dog not found",
-//           });
-//        }
-
-//        res.status(200).json(dog);
-//     } catch (error) {
-//        res.status(500).json({
-//           message: "Error while getting user del getbyId",
-//        });
-//     }
-//  }
+      res.status(202).json({
+         message: "Dog updated successfully",
+      });
+   } catch (error) {
+      res.status(500).json({
+         message: "Error while updating dog",
+      });
+   }
+}
 
 }
