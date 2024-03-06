@@ -29,3 +29,12 @@ export interface TokenData {
    photo?: string;
    gallery?: string[];
 }
+
+export interface CreateAppointmentsRequestBody {
+   user_id: number,
+   dog_id: number,
+   activity_id: number,
+   date: string,
+   hour: string,
+   is_active: string
+}
