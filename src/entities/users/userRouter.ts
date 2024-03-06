@@ -15,4 +15,6 @@ router.post("/login", authController.login);
 router.get("/", UserController.getAll);
 router.get("/todos", UserController.getAllUsersFor);
 router.patch("/",auth, UserController.update);
+router.patch("/updatestate/:id", UserController.updateActive);
+router.delete("/:id", UserController.delete);
 export default router;

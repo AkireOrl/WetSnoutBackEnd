@@ -28,6 +28,7 @@ export class userController {
                email: true,
                id: true,
             },
+            relations: ['role'],  // Incluir la relación con el rol
          };
 
          if (page && limit ) {
@@ -132,4 +133,48 @@ async getById(req: Request, res: Response): Promise<void | Response<any>> {
    }
 
 }
+
+async delete(req: Request, res: Response): Promise<void | Response<any>> {
+   try {
+      const id = +req.params.id;
+
+      const userRepository = AppDataSource.getRepository(User);
+      await userRepository.delete(id);
+
+      res.status(200).json({
+         message: "User deleted successfully",
+      });
+   } catch (error: any) {
+      console.error("Error while delete users:", error);
+      res.status(500).json({
+         message: "Error while delete users",
+         error: error.message,
+      });
+   }
+}
+
+async updateActive(req: Request, res: Response): Promise<void | Response<any>> {
+   try{
+      const id = parseInt(req.params.id);
+      const {is_active} = req.body;
+
+      const userRepository = AppDataSource.getRepository(User);
+      const user = await userRepository.findOneBy({id});
+      if  (!user) {
+         return res.status(404).json({ error: 'Usuario no encontrado' });
+         }
+        
+      // Actualiza el campo 'active' del usuario
+      user.is_active = is_active;
+
+      // Guarda los cambios en la base de datos
+      await userRepository.save(user);
+
+      // Responde con el usuario actualizado
+      res.json(user);
+    } catch (error) {
+      console.error('Error al actualizar el usuario:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  }
 }
