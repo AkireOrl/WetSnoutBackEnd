@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { AppDataSource } from "../../database/data-source";
 import { User } from "./userModel";
 import { Role } from "../roles/roleModel";
+import { UserRoles } from "../../constants/UserRole";
 
 
 
@@ -177,4 +178,89 @@ async updateActive(req: Request, res: Response): Promise<void | Response<any>> {
       res.status(500).json({ error: 'Error interno del servidor' });
     }
   }
+
+//   async updateRole(req: Request, res: Response): Promise<void | Response<any>> {
+//    try {
+//      const userId = parseInt(req.params.id);
+//      const { roleId } = req.body; // Supongamos que recibes el ID del nuevo rol
+
+//      const userRepository = AppDataSource.getRepository(User);
+//      const roleRepository = AppDataSource.getRepository(Role);
+
+//      try {
+//        const user = await userRepository.find({
+//          where: { id: userId },
+//          relations: ['roles'],
+//        });
+
+//        const newRole = await roleRepository.findOneOrFail(roleId);
+
+//        if (!user || user.length === 0) {
+//          return res.status(404).json({ error: 'Usuario no encontrado' });
+//        }
+
+//        // Limpia los roles actuales del usuario
+//        user[0].roles = [];
+
+//        // Asigna el nuevo rol al usuario
+//        user[0].roles.push(newRole);
+
+//        // Guarda los cambios en el usuario y en la tabla intermedia
+//        await userRepository.save(user[0]);
+
+//        // Responde con el usuario actualizado
+//        res.json(user[0]);
+//      } catch (error) {
+//        return res.status(404).json({ error: 'Usuario o rol no encontrado' });
+//      }
+//    } catch (error) {
+//      console.error('Error al actualizar el usuario:', error);
+//      res.status(500).json({ error: 'Error interno del servidor' });
+//    }
+//  }
+
+async updateRole(req: Request, res: Response): Promise<void | Response<any>> {
+   try {
+     const userId = parseInt(req.params.id);
+     const { roleId } = req.body;
+
+     const userRepository = AppDataSource.getRepository(User);
+     const roleRepository = AppDataSource.getRepository(Role);
+
+     try {
+      const user = await userRepository.findOne({
+                   where: { id: userId },
+                   relations: ['roles'],
+                 });
+
+       if (!user) {
+         return res.status(404).json({ error: 'Usuario no encontrado' });
+       }
+
+       const newRole = await roleRepository.findOneBy({ id: roleId });
+
+       // Limpia los roles actuales del usuario
+       user.roles = [];
+
+       // Asigna el nuevo rol al usuario
+       if (newRole) {
+         user.roles.push(newRole);
+       }
+
+       // Guarda los cambios en el usuario y en la tabla intermedia
+       await userRepository.save(user);
+
+       // Responde con el usuario actualizado
+       res.json(user);
+     } catch (error) {
+       console.error('Error al actualizar el usuario:', error);
+       res.status(404).json({ error: 'Usuario o rol no encontrado' });
+     }
+   } catch (error) {
+     console.error('Error interno del servidor:', error);
+     res.status(500).json({ error: 'Error interno del servidor' });
+   }
+ }
 }
+
+

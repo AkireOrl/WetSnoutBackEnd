@@ -10,5 +10,6 @@ const DogController = new dogController();
 router.get("/dogs", DogController.getAll);
 router.post("/dogs", DogController.create);
 router.patch("/dogs/:id", DogController.update);
+router.patch("/updatedogstate/:id", DogController.updateDogActive);
 
 export default router;

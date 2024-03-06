@@ -114,4 +114,29 @@ async update(req: Request, res: Response): Promise<void | Response<any>> {
    }
 }
 
+async updateDogActive(req: Request, res: Response): Promise<void | Response<any>> {
+   try{
+      const id = parseInt(req.params.id);
+      const {is_active} = req.body;
+
+      const dogRepository = AppDataSource.getRepository(Dog);
+      const dog = await dogRepository.findOneBy({id});
+      if  (!dog) {
+         return res.status(404).json({ error: 'Animal no encontrado' });
+         }
+        
+      // Actualiza el campo 'active' del animal
+      dog.is_active = is_active;
+
+      // Guarda los cambios en la base de datos
+      await dogRepository.save(dog);
+
+      // Responde con el animal actualizado
+      res.json(dog);
+    } catch (error) {
+      console.error('Error al actualizar el perrete:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  }
+
 }
