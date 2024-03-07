@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableUnique } from "typeorm";
 
 export class CreateAppointments1709393632409 implements MigrationInterface {
 
@@ -82,7 +82,13 @@ foreignKeys: [
         referencedColumnNames: ["id"],
         onDelete: "CASCADE",
        },
-]
+],
+uniques: [
+    new TableUnique({
+       name: "unique_appointment",
+       columnNames: ["dog_id", "date", "hour"],
+    }),
+ ],
 }),
 true
         );

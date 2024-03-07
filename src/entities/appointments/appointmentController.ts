@@ -10,16 +10,22 @@ import { CreateAppointmentsRequestBody } from "../../types/types";
 //---------------------------------------------------------------------
 
 export class AppointmentController {
-    async getAllAppointments(req: Request, res: Response): Promise<Appointment[]> {
+    async getAllAppointments(req: Request, res: Response): Promise<void> {
         try {
+          const role = req.tokenData.userRoles;
           const appointmentRepository = AppDataSource.getRepository(Appointment);
-          const appointments = await appointmentRepository.find();
-          return appointments;
+          const appointments = await appointmentRepository.find({
+            relations: ['user', 'dog'], // Agrega esto para obtener la información relacionada de la entidad User y Dog
+          });
+          res.status(200).json(appointments);
         } catch (error) {
           console.error('Error al obtener todas las citas:', error);
-          throw new Error('Error al obtener todas las citas');
-        }
+          res.status(500).json({
+            message: 'Error al obtener todas las citas',
+          
+          });
     }
+  }
 
 
 async create(
@@ -71,6 +77,39 @@ async create(
       message: 'Error while creating Appointment',
       error: error.message,
     });
+  }
+}
+
+async update(req: Request, res: Response): Promise<void | Response<any>> {
+  try {
+     const id = +req.params.id;
+     const data = req.body;
+
+     const appointmentRepository = AppDataSource.getRepository(Appointment);
+     const appointmentUpdated = await appointmentRepository.update({ id: id }, data);
+     res.status(202).json({
+        message: "Appointment updated successfully",
+     });
+  } catch (error) {
+     res.status(500).json({
+        message: "Error while updating appointment",
+     });
+  }
+}
+async delete(req: Request, res: Response): Promise<void | Response<any>> {
+  try {
+     const id = +req.params.id;
+
+     const appointmentRepository = AppDataSource.getRepository(Appointment);
+     await appointmentRepository.delete(id);
+
+     res.status(200).json({
+        message: "Appointment deleted successfully",
+     });
+  } catch (error) {
+     res.status(500).json({
+        message: "Error while deleting appointment",
+     });
   }
 }
 }

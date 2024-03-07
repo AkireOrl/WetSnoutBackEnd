@@ -15,6 +15,7 @@ export const AppDataSource = new DataSource({
     username: "root",
     password: "root",
     database: "wetsnout",
+   
     entities: [
         User,
         Appointment,
