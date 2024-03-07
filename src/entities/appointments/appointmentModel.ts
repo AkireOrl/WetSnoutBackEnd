@@ -1,9 +1,10 @@
-import {  Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm"
+import {  Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, Unique } from "typeorm"
 import { Dog } from "../dogs/dogModel";
 import { User } from "../users/userModel";
 import { Activity } from "../activities/activityModel";
 
 @Entity("appointments")
+@Unique(["dog_id", "date", "hour"])
 export class Appointment {
     @PrimaryGeneratedColumn()
     id?: number;
