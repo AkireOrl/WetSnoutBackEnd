@@ -33,7 +33,7 @@ export class Appointment {
     @Column()
     updated_at?: Date
 
-    @ManyToOne(() => User, (user) => user.roles)
+    @ManyToOne(() => User, (user) => user.userAppointments)
     @JoinColumn ({name: "user_id", referencedColumnName:"id"})
     user?: User;
 

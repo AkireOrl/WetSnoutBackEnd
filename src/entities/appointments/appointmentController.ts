@@ -112,5 +112,82 @@ async delete(req: Request, res: Response): Promise<void | Response<any>> {
      });
   }
 }
+
+async getByUserId(req: Request, res: Response): Promise<void | Response<any>> {
+  try {
+    const id = +req.params.id;
+    const appointmentRepository = AppDataSource.getRepository(Appointment);
+    const appointments = await appointmentRepository.findBy({
+      user_id: id,
+    });
+
+    if (!appointments || appointments.length === 0) {
+      return res.status(404).json({
+        message: "Appointments not found for the user",
+      });
+    }
+
+    const userAppointments = [];
+    for (const appointment of appointments) {
+      const dogRepository = AppDataSource.getRepository(Dog);
+      const dog = await dogRepository.findOneBy({ id: appointment.dog_id });
+
+      if (dog) {
+        userAppointments.push({
+          appointment_id: appointment.id,
+          date: appointment.date,
+          hour: appointment.hour,
+          is_active: appointment.is_active,
+          // Agrega más campos de la cita según sea necesario
+          dog_profile: {
+            dog_id: dog.id,
+            photo: dog.photo,
+            name: dog.name,
+            age:  dog.age,
+            size: dog.size,
+            race: dog.race,
+            sociable: dog.sociable,
+            // Agrega más campos del perfil del perro según sea necesario
+          },
+        });
+      }
+    }
+
+    res.status(200).json({
+      user_id: id,
+      appointments: userAppointments,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error while getting appointments",
+    });
+  }
+}
+
+async updateAppointmentActive(req: Request, res: Response): Promise<void | Response<any>> {
+  try{
+     const id = parseInt(req.params.id);
+     const {is_active} = req.body;
+
+     const AppointmentRepository = AppDataSource.getRepository(Appointment);
+     const appointment = await AppointmentRepository.findOneBy({id});
+     if  (!appointment) {
+        return res.status(404).json({ error: 'Cita no encontrada' });
+        }
+       
+     // Actualiza el campo 'active' del animal
+     appointment.is_active = is_active;
+
+     // Guarda los cambios en la base de datos
+     await AppointmentRepository.save(appointment);
+
+     // Responde con el animal actualizado
+     res.json(appointment);
+     console.log(appointment, "soy servidor")
+   } catch (error) {
+     console.error('Error al actualizar la cita:', error);
+     res.status(500).json({ error: 'Error interno del servidor' });
+   }
+ }
 }
 

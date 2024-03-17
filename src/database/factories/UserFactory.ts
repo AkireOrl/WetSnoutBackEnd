@@ -17,7 +17,8 @@ export class UserFactory extends BaseFactory<User> {
      
      });
        user.password = bcrypt.hashSync("12345678", 10);
-       user.photo = faker.image.avatar();
+       user.photo = "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+
        user.city = faker.location.city();
        user.is_partner =  user.is_partner ? true : false;
        user.is_volunteer = user.is_volunteer?true:false;

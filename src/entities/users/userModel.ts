@@ -58,7 +58,7 @@ export class User {
 
    
 
-    @OneToMany(() => Appointment, (appointment) => appointment.user_id)
+    @OneToMany(() => Appointment, (appointment) => appointment.user)
     userAppointments?: Appointment[];
 
 }

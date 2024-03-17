@@ -15,8 +15,9 @@ router.post("/login", authController.login);
 
 // router.get("/", UserController.getAll);
 router.get("/todos",auth, isSuperAdmin, UserController.getAllUsersFor);
-router.patch("/",auth, UserController.update);
+router.patch("/:id",auth, UserController.update);
 router.patch("/updatestate/:id",auth, isSuperAdmin, UserController.updateActive);
 router.patch("/updaterole/:id",auth, isSuperAdmin, UserController.updateRole);
 router.delete("/:id",auth, isSuperAdmin, UserController.delete);
+router.get("/:id",auth, UserController.getById);
 export default router;
