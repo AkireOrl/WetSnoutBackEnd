@@ -32,7 +32,7 @@ Tecnologías utilizadas:
 
 
 ## Diagrama BD
-!['imagen-db'](./assets/WetSnoutDB.png)
+!['imagen-db'](./src/assets/WetSnoutDB.png)
 
 ## Instalación en local
 1. Clonar el repositorio
@@ -45,7 +45,7 @@ Tecnologías utilizadas:
 
 ## Endpoints
 
-Puedes  ver todos los endpoints disponibles en [este archivo] () que puedes descargar e importar directamente a Postman.
+Puedes  ver todos los endpoints disponibles en [este archivo](./WetSnout.postman_collection.json) que puedes descargar e importar directamente a Postman.
 
 ## Contribuciones
 Las sugerencias y aportaciones son siempre bienvenidas.  
