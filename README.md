@@ -20,9 +20,9 @@
 Este proyecto requería una API funcional conectada a una base de datos relacional.
 
 ## Sobre el proyecto
-El proyecto consta de un aplicación web para la gestión de una protectora de animales. En esta aplicación los usuarios interesados pueden registrarse, ver la fiicha de los peros y pueden agendar un paseo con el perro selecionado, pueden editar sus datos, y desactivar (eliminar) las reservas en caso de no querer/poder ir al encuentro.
+El proyecto consta de un aplicación web para la gestión de una protectora de animales. En esta aplicación los usuarios interesados pueden registrarse, ver la ficha de los perros y pueden agendar un paseo con el perro seleccionado, pueden editar sus datos, y desactivar (eliminar) las reservas en caso de no querer/poder ir al encuentro.
 Además la aplicación permite a los usuarios con privilegios  registrar animales, editar el estado de las citas y ver cuantas hay.
-Los super_admin, pueden cambiar de role a los usuarios y pueden cambiar el estado de los uduarios de activos a inactivos. 
+Los super_admin, pueden cambiar de role a los usuarios y pueden cambiar el estado de los usuarios de activos a inactivos. 
 El objetivo del proyecto es crear un backend para la aplicación "Wetsnout", que permita realizar todas estás operaciones desde el frontend.
 
 
@@ -44,143 +44,8 @@ Tecnologías utilizadas:
 7. ...
 
 ## Endpoints
-<details>
-<summary>Endpoints</summary>
 
-- AUTH
-    - REGISTER
-
-            POST http://localhost:3000/auth/register
-        body:
-        
-            {
-                "username": "DavZZ",
-                "name": "David",
-                "surname": "Rodri",
-                "email": "david@example.com",
-                "password": "123456"
-            }
-        
-
-    - LOGIN
-
-            POST http://localhost:3000/auth/login 
-        body:
-        
-            {
-                "email": "david@example.com",
-                "password": "123456"
-            }
-        
-
-- USERS
-
-    - Crear User
-
-            POST http://localhost:3000/api/users
-            
-        body:
-       
-     
-           {
-            "username": "UserClient",
-            "name": "UserClie",
-            "surname": "Cuser",
-            "password_hash": "123456",
-            "email": "cuser@example.com"
-            }
-
-    
-    -  Obtener todos los usuarios (super_admin)
-    
-            GET http://localhost:3000/api/users
-
-    
-    - Get user by id 
-    
-            GET http://localhost:3000/api/users/:id
-
-            
-    - Update user info 
-    
-            PATCH http://localhost:3000/api/users/:id
-        body: 
-          
-                
-                {
-                "username" : "Cambio333UsiarioPrueba",
-                "name": "Cam33UsiarioPr",
-                "surname": "USUCita",
-                "password_hash": "123456",
-                "email" : "Priue@example.com"
-                 }
-                    
-            
-
-            
-- ARTISTAS
-    
-    -Crear tatuador
-        
-      POST http://localhost:3000/api/artist
-      
-    body:  
-        
-    
-            {
-                "username" : "UserArtis",
-                "name": "UserAr",
-                "surname": "Auser",
-                "password_hash": "123456",
-                "email" : "auser@example.com"
-            }
-
-    -Ver tatuador por id
-        
-        GET http://localhost:3000/api/artist/16
-
-    -Perfil del tatuador (con id)
-
-        GET http://localhost:3000/api/artist/artistprofile/17
-        
-    -Ver todos los tatuadores(super_admin)
-    
-        GET http://localhost:3000/api/artist
-          
-          
-           
-
-- CITAS
-
-    -Crear Cita
-
-            POST http://localhost:3000/api/appointment
-            
-    body:
-      
-            
-            {
-                "user_id": 9,
-                "artist_id": 7,
-                "date": "2024-04-12",
-                "hour": "13:00h"
-            }
-            
-    -Ver todas las citas (super_admin)
-        
-            GET http://localhost:3000/api/appointment
-            
-    -Actualizar citas (con id)
-    
-            PATCH http://localhost:3000/api/appointment/1
-      
-    -Borrar cita (con id de cita)
-    
-            DELETE http://localhost:3000/api/appointment/1
-            
-    
-        
-</details>
+Puedes  ver todos los endpoints disponibles en [este archivo] () que puedes descargar e importar directamente a Postman.
 
 ## Contribuciones
 Las sugerencias y aportaciones son siempre bienvenidas.  
@@ -205,10 +70,8 @@ Puedes hacerlo de dos maneras:
 
 
 ## Webgrafia:
-Para conseguir mi objetivo he recopilado información de:
-- https://github.com/fidelfsd/fsd-online-express-typeorm-academy-api 
-- https://github.com/vincenzo2202/Backend_tatto-studio_API_DB
-- https://typeorm.io/
+Para conseguir mi objetivo he recopilado información de mi proyecto anterior:
+https://github.com/AkireOrl/Proyecto4BootCamp
 
 
 ## Agradecimientos:
@@ -217,9 +80,6 @@ Agradezco a mis compañeros el tiempo dedicado a este proyecto y a los profesore
 
 - **Gabe**  
 <a href="https://github.com/GabrielEscudillo" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> 
-
-- **Reynaldo**  
-<a href="https://github.com/ReynaldoMunozF" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
 
 - **Hector**  
 <a href="https://www.github.com/userGithub/" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=green" target="_blank"></a> 
